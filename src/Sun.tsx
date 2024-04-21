@@ -1,6 +1,3 @@
-import React from "react";
-import { MeshBasicMaterial } from "three";
-
 const Sun = () => {
   return (
     <>

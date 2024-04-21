@@ -1,12 +1,9 @@
-import { useEffect, useRef, useState } from "react";
-import reactLogo from "./assets/react.svg";
-import viteLogo from "/vite.svg";
+import { useEffect, useRef } from "react";
 import "./App.css";
 import { Canvas, useThree } from "@react-three/fiber";
-import { OrbitControls, PerspectiveCamera } from "@react-three/drei";
+import { OrbitControls } from "@react-three/drei";
 import Moons from "./Moons";
 import Sun from "./Sun";
-import { SpotLightHelper } from "three";
 import * as THREE from "three";
 
 const CameraComponent = () => {
