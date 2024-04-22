@@ -1,0 +1,6 @@
+div {
+  color: aqua;
+  z-index: 200;
+  position: fixed;
+  pointer-events: none;
+}
