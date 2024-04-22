@@ -81,52 +81,77 @@ const ParticlesFunc = () => {
 };
 
 function App() {
+  const wrapperRef = useRef<HTMLDivElement>(null);
+
   return (
-    <>
-      {/* <View
+    <div ref={wrapperRef}>
+      <View
         style={{
-          position: "absolute",
+          position: "fixed",
           top: 0,
-          right: 0,
-          width: "30%",
-          height: "30%",
+          bottom: 0,
+          left: 0,
+          width: "50vw",
+          zIndex: "100",
+        }}
+      >
+        {/* <Canvas shadows> */}
+
+        <CameraComponent />
+        {/* color property sets the scene background color */}
+        <color args={["black"]} attach={"background"} />
+        <OrbitControls />
+        {/* lights */}
+        <ambientLight intensity={0.05} />
+        <directionalLight castShadow intensity={1} position={[-3, 0, 0]} />
+        <ParticlesFunc />
+        {/* earth */}
+        <mesh position={[0, 0, 0]}>
+          <sphereGeometry args={[1, 16]} />
+          <meshBasicMaterial wireframe side={1} />
+        </mesh>
+        {/* moons */}
+        <Moons />
+        {/* sun */}
+        <Sun />
+      </View>
+      <Canvas shadows>
+        <View.Port />
+      </Canvas>
+      <View
+        style={{
+          position: "fixed",
+          top: 0,
+          bottom: 0,
+          left: 0,
+          width: "50vw",
           zIndex: "100",
         }}
       >
         <CameraComponent />
+        {/* color property sets the scene background color */}
+        <color args={["black"]} attach={"background"} />
+        <OrbitControls />
+
+        {/* lights */}
+        <ambientLight intensity={0.05} />
+        <directionalLight castShadow intensity={1} position={[-3, 0, 0]} />
+
         <ParticlesFunc />
+
+        {/* earth */}
+        <mesh position={[0, 0, 0]}>
+          <sphereGeometry args={[1, 16]} />
+          <meshBasicMaterial wireframe side={1} />
+        </mesh>
+        {/* moons */}
+        <Moons />
+
+        {/* sun */}
         <Sun />
-      </View> */}
-      <Canvas>
-        <View.Port />
-      </Canvas>
-      <div id="canvas-container">
-        <Canvas shadows>
-          <CameraComponent />
-          {/* color property sets the scene background color */}
-          <color args={["black"]} attach={"background"} />
-          <OrbitControls />
-
-          {/* lights */}
-          <ambientLight intensity={0.05} />
-          <directionalLight castShadow intensity={1} position={[-3, 0, 0]} />
-
-          <ParticlesFunc />
-
-          {/* earth */}
-          <mesh position={[0, 0, 0]}>
-            <sphereGeometry args={[1, 16]} />
-            <meshBasicMaterial wireframe side={1} />
-          </mesh>
-          {/* moons */}
-          <Moons />
-
-          {/* sun */}
-          <Sun />
-        </Canvas>
-      </div>
+      </View>
       <PopupInfo />
-    </>
+    </div>
   );
 }
 // function App() {
