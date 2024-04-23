@@ -1,6 +1,20 @@
-div {
-  color: aqua;
-  z-index: 200;
+.popup {
+  font-size: 1rem;
+  color: black;
+  background-color: antiquewhite;
+  z-index: 300;
   position: fixed;
   pointer-events: none;
+  top: 500px;
+  right: 0;
+  width: 400px;
+  height: auto;
+  margin: 20px;
+  border: 2px solid blue;
+  border-radius: 10px;
+}
+
+.title {
+  font-size: 2rem;
+  color: blue;
 }

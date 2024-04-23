@@ -1,7 +1,12 @@
-import { useEffect, useRef } from "react";
+import { MutableRefObject, useEffect, useRef } from "react";
 import "./App.css";
 import { Canvas, useStore, useThree } from "@react-three/fiber";
-import { OrbitControls, OrthographicCamera, View } from "@react-three/drei";
+import {
+  OrbitControls,
+  OrthographicCamera,
+  PerspectiveCamera,
+  View,
+} from "@react-three/drei";
 import Moons from "./Moons";
 import Sun from "./Sun";
 import * as THREE from "three";
@@ -37,17 +42,6 @@ export type ViewportProps = {
   ViewProps & React.RefAttributes<HTMLElement | THREE.Group>
 >;
 
-const CameraComponent = () => {
-  const three = useThree();
-  const camera = three.camera;
-
-  useEffect(() => {
-    camera.position.set(0, 10, 0);
-    camera.lookAt(0, 0, 0);
-  }, [camera]);
-  return null;
-};
-
 //particles
 const ParticlesFunc = () => {
   const particleArray = [];
@@ -80,78 +74,101 @@ const ParticlesFunc = () => {
   return <>{particleArray}</>;
 };
 
+// Inside Camera component
+interface CameraProps {
+  lookAt: React.RefObject<THREE.Group>;
+}
+const Camera: React.FC<CameraProps> = ({ lookAt }) => {
+  const camera = useRef<THREE.PerspectiveCamera>(null);
+  useEffect(() => {
+    if (lookAt.current && camera.current) {
+      camera.current.lookAt(lookAt.current.position);
+    }
+  }, [lookAt, camera]);
+  return null;
+};
+
+const Scene = () => {
+  const moonGroupRef = useRef<THREE.Mesh>(null);
+
+  return (
+    <>
+      <color args={["black"]} attach={"background"} />
+      <Camera lookAt={moonGroupRef} />
+      {console.log(moonGroupRef.current?.position)}
+      <ambientLight intensity={0.05} />
+      <directionalLight castShadow intensity={1} position={[-3, 0, 0]} />
+
+      <ParticlesFunc />
+
+      {/* earth */}
+      <mesh position={[0, 0, 0]}>
+        <sphereGeometry args={[1, 16]} />
+        <meshBasicMaterial wireframe side={1} />
+      </mesh>
+      {/* moons */}
+      <Moons moonGroupRef={moonGroupRef} />
+
+      {/* sun */}
+      <Sun />
+    </>
+  );
+};
+
 function App() {
   const wrapperRef = useRef<HTMLDivElement>(null);
 
   return (
-    <div ref={wrapperRef}>
-      <View
+    <>
+      <PopupInfo title="crescent" />
+      <div
+        ref={wrapperRef}
         style={{
           position: "fixed",
           top: 0,
-          bottom: 0,
           left: 0,
-          width: "50vw",
-          zIndex: "100",
+          right: 0,
+          bottom: 0,
         }}
       >
-        {/* <Canvas shadows> */}
+        {/* main view */}
+        <View
+          style={{
+            position: "fixed",
+            top: 0,
+            bottom: 0,
+            left: 0,
+            width: "100vw",
+            zIndex: "100",
+          }}
+        >
+          <PerspectiveCamera makeDefault position={[4, 6, 4]} fov={55} />
+          {/* color property sets the scene background color */}
+          <OrbitControls />
+          <Scene />
+        </View>
 
-        <CameraComponent />
-        {/* color property sets the scene background color */}
-        <color args={["black"]} attach={"background"} />
-        <OrbitControls />
-        {/* lights */}
-        <ambientLight intensity={0.05} />
-        <directionalLight castShadow intensity={1} position={[-3, 0, 0]} />
-        <ParticlesFunc />
-        {/* earth */}
-        <mesh position={[0, 0, 0]}>
-          <sphereGeometry args={[1, 16]} />
-          <meshBasicMaterial wireframe side={1} />
-        </mesh>
-        {/* moons */}
-        <Moons />
-        {/* sun */}
-        <Sun />
-      </View>
-      <Canvas shadows>
-        <View.Port />
-      </Canvas>
-      <View
-        style={{
-          position: "fixed",
-          top: 0,
-          bottom: 0,
-          left: 0,
-          width: "50vw",
-          zIndex: "100",
-        }}
-      >
-        <CameraComponent />
-        {/* color property sets the scene background color */}
-        <color args={["black"]} attach={"background"} />
-        <OrbitControls />
+        {/* moon focus view */}
+        <View className="moon-focus-view">
+          {/* <PerspectiveCamera
+          makeDefault
+          position={[4, 4, 4]}
+          fov={25}
+          // lookAt={}
+        /> */}
 
-        {/* lights */}
-        <ambientLight intensity={0.05} />
-        <directionalLight castShadow intensity={1} position={[-3, 0, 0]} />
+          <Scene />
+        </View>
 
-        <ParticlesFunc />
-
-        {/* earth */}
-        <mesh position={[0, 0, 0]}>
-          <sphereGeometry args={[1, 16]} />
-          <meshBasicMaterial wireframe side={1} />
-        </mesh>
-        {/* moons */}
-        <Moons />
-
-        {/* sun */}
-        <Sun />
-      </View>
-      <PopupInfo />
-    </div>
+        {/* canvas combines and renders all the View components */}
+        <Canvas
+          shadows
+          eventSource={wrapperRef as MutableRefObject<HTMLElement>}
+        >
+          <View.Port />
+        </Canvas>
+      </div>
+    </>
   );
 }
 // function App() {

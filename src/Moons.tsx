@@ -1,6 +1,6 @@
 import { DragControls, useTexture } from "@react-three/drei";
 import { ThreeElements, useFrame } from "@react-three/fiber";
-import { useRef } from "react";
+import React, { useRef } from "react";
 import { Euler } from "three";
 import * as THREE from "three";
 import MoonTexture from "/img/Moon.png";
@@ -34,19 +34,21 @@ type DragControlsProps = {
   children: React.ReactNode;
 };
 
-const Moons = () => {
-  const moonGroupRef = useRef<THREE.Group>(null);
-  const matrix = new THREE.Matrix4();
+interface MoonsProps {
+  moonGroupRef: React.Ref<THREE.Mesh>;
+}
+const Moons: React.FC<MoonsProps> = ({ moonGroupRef }) => {
+  // const matrix = new THREE.Matrix4();
 
   const MoonTexture1 = useTexture(MoonTexture);
   console.log(MoonTexture);
 
   //moon rotation animation
-  // useFrame((state, delta) => {
-  //   if (moonGroupRef.current) {
-  //     moonGroupRef.current.rotation.y += 0.001;
-  //   }
-  // });
+  useFrame((state, delta) => {
+    if (moonGroupRef.current) {
+      moonGroupRef.current.rotation.y += 0.001;
+    }
+  });
   return (
     <>
       <DragControls
@@ -59,9 +61,8 @@ const Moons = () => {
         <group
           position={[0, 0, 0]}
           // rotation={new Euler(0, Math.PI / 1, 0)}
-          ref={moonGroupRef}
         >
-          <mesh position={[-4, 0, 0]} receiveShadow>
+          <mesh position={[-4, 0, 0]} receiveShadow ref={moonGroupRef}>
             <sphereGeometry args={[1, 32]} />
             <meshStandardMaterial map={MoonTexture1} />
           </mesh>
