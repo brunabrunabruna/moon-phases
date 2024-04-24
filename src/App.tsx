@@ -76,19 +76,20 @@ const ParticlesFunc = () => {
 
 // Inside Camera component
 interface CameraProps {
-  lookAt: React.RefObject<THREE.Group>;
+  lookAt: React.RefObject<THREE.Mesh>;
 }
-const Camera: React.FC<CameraProps> = ({ lookAt }) => {
+const Camera = (props: CameraProps) => {
   const camera = useRef<THREE.PerspectiveCamera>(null);
   useEffect(() => {
-    if (lookAt.current && camera.current) {
-      camera.current.lookAt(lookAt.current.position);
+    if (props.lookAt.current && camera.current) {
+      camera.current.lookAt(props.lookAt.current.position);
     }
-  }, [lookAt, camera]);
+  }, [props.lookAt, camera]);
   return null;
 };
 
-const Scene = () => {
+//scene component
+const Scene = (props: { draggable: boolean }) => {
   const moonGroupRef = useRef<THREE.Mesh>(null);
 
   return (
@@ -101,13 +102,8 @@ const Scene = () => {
 
       <ParticlesFunc />
 
-      {/* earth */}
-      <mesh position={[0, 0, 0]}>
-        <sphereGeometry args={[1, 16]} />
-        <meshBasicMaterial wireframe side={1} />
-      </mesh>
       {/* moons */}
-      <Moons moonGroupRef={moonGroupRef} />
+      <Moons moonGroupRef={moonGroupRef} draggable={props.draggable} />
 
       {/* sun */}
       <Sun />
@@ -145,19 +141,26 @@ function App() {
           <PerspectiveCamera makeDefault position={[4, 6, 4]} fov={55} />
           {/* color property sets the scene background color */}
           <OrbitControls />
-          <Scene />
+          <Scene draggable={true} />
+
+          {/* earth */}
+          <mesh position={[0, 0, 0]}>
+            <sphereGeometry args={[1, 16]} />
+            <meshBasicMaterial wireframe side={1} />
+          </mesh>
         </View>
 
         {/* moon focus view */}
         <View className="moon-focus-view">
-          {/* <PerspectiveCamera
-          makeDefault
-          position={[4, 4, 4]}
-          fov={25}
-          // lookAt={}
-        /> */}
+          <PerspectiveCamera
+            makeDefault
+            position={[2, 0, 0]}
+            rotation={new THREE.Euler(0, Math.PI / 2, 0)}
+            fov={25}
+            // lookAt={}
+          />
 
-          <Scene />
+          <Scene draggable={false} />
         </View>
 
         {/* canvas combines and renders all the View components */}
@@ -171,44 +174,5 @@ function App() {
     </>
   );
 }
-// function App() {
-//   return (
-//     <div id="canvas-container">
-//       <Canvas shadows>
-//         <CameraComponent />
-//         <color args={["black"]} attach={"background"} />
-//         <OrbitControls />
 
-//         <ambientLight intensity={0.05} />
-//         <directionalLight castShadow intensity={1} position={[-3, 0, 0]} />
-
-//         <ParticlesFunc />
-
-//         <mesh position={[0, 0, 0]}>
-//           <sphereGeometry args={[1, 16]} />
-//           <meshBasicMaterial wireframe side={1} />
-//         </mesh>
-
-//         <Moons />
-
-//         <Sun />
-
-//         <View
-//           className="popup-info"
-//           style={{
-//             position: "absolute",
-//             top: 0,
-//             right: 0,
-//             width: "30%",
-//             height: "30%",
-//           }}
-//         >
-//           <CameraComponent />
-//           <ParticlesFunc />
-//           {/* Add any other components you want to render in the second view */}
-//         </View>
-//       </Canvas>
-//     </div>
-//   );
-// }
 export default App;

@@ -34,10 +34,11 @@ type DragControlsProps = {
   children: React.ReactNode;
 };
 
-interface MoonsProps {
+type MoonsProps = {
   moonGroupRef: React.Ref<THREE.Mesh>;
-}
-const Moons: React.FC<MoonsProps> = ({ moonGroupRef }) => {
+  draggable: boolean;
+};
+const Moons = (props: MoonsProps) => {
   // const matrix = new THREE.Matrix4();
 
   const MoonTexture1 = useTexture(MoonTexture);
@@ -45,29 +46,37 @@ const Moons: React.FC<MoonsProps> = ({ moonGroupRef }) => {
 
   //moon rotation animation
   useFrame((state, delta) => {
-    if (moonGroupRef.current) {
-      moonGroupRef.current.rotation.y += 0.001;
+    if (props.moonGroupRef.current) {
+      props.moonGroupRef.current.rotation.y += 0.01;
     }
   });
+
+  const moonMesh = () => {
+    return (
+      <group
+        position={[0, 0, 0]}
+        // rotation={new Euler(0, Math.PI / 1, 0)}
+      >
+        <mesh position={[-4, 0, 0]} receiveShadow ref={props.moonGroupRef}>
+          <sphereGeometry args={[1, 32]} />
+          <meshStandardMaterial map={MoonTexture1} />
+        </mesh>
+      </group>
+    );
+  };
+
   return (
     <>
-      <DragControls
-        // ref={ref}
-        // matrix={matrix}
-        // autoTransform={true}
-        // onDrag={(localMatrix) => matrix.copy(localMatrix) }
-        axisLock="y"
-      >
-        <group
-          position={[0, 0, 0]}
-          // rotation={new Euler(0, Math.PI / 1, 0)}
+      {props.draggable ? (
+        <DragControls
+          // autoTransform={true}
+          axisLock="y"
         >
-          <mesh position={[-4, 0, 0]} receiveShadow ref={moonGroupRef}>
-            <sphereGeometry args={[1, 32]} />
-            <meshStandardMaterial map={MoonTexture1} />
-          </mesh>
-        </group>
-      </DragControls>
+          {moonMesh()}
+        </DragControls>
+      ) : (
+        moonMesh()
+      )}
     </>
 
     // // individual moons
