@@ -34,6 +34,35 @@ type DragControlsProps = {
   children: React.ReactNode;
 };
 
+type MoonMeshProps = {
+  moonGroupRef: React.RefObject<THREE.Group>;
+  moonRef: React.RefObject<THREE.Mesh>;
+  // draggable: boolean;
+};
+const MoonMesh = (props: MoonMeshProps) => {
+  const moonTexture1 = useTexture(MoonTexture);
+
+  //moon rotation animation
+  useFrame(() => {
+    if (props.moonGroupRef.current) {
+      props.moonGroupRef.current.rotation.y += 0.001;
+    }
+  });
+  return (
+    <group
+      position={[0, 0, 0]}
+      ref={props.moonGroupRef}
+      // rotation={new Euler(0, Math.PI / 1, 0)}
+      rotateY={moonRotation}
+    >
+      <mesh position={[-4, 0, 0]} receiveShadow ref={props.moonRef}>
+        <sphereGeometry args={[1, 32]} />
+        <meshStandardMaterial map={moonTexture1} />
+      </mesh>
+    </group>
+  );
+};
+
 type MoonsProps = {
   moonGroupRef: React.RefObject<THREE.Group>;
   moonRef: React.RefObject<THREE.Mesh>;
@@ -42,36 +71,6 @@ type MoonsProps = {
 const Moons = (props: MoonsProps) => {
   // const matrix = new THREE.Matrix4();
 
-  const MoonTexture1 = useTexture(MoonTexture);
-
-  //moon rotation animation
-  useFrame(() => {
-    if (props.moonGroupRef.current) {
-      props.moonGroupRef.current.rotation.y += 0.001;
-    }
-  });
-
-  // useFrame(() => {
-  //   if (props.moonRef.current) {
-  //     // console.log(props.moonRef.current?.position);
-  //   }
-  // });
-
-  const moonMesh = () => {
-    return (
-      <group
-        position={[0, 0, 0]}
-        ref={props.moonGroupRef}
-        // rotation={new Euler(0, Math.PI / 1, 0)}
-      >
-        <mesh position={[-4, 0, 0]} receiveShadow ref={props.moonRef}>
-          <sphereGeometry args={[1, 32]} />
-          <meshStandardMaterial map={MoonTexture1} />
-        </mesh>
-      </group>
-    );
-  };
-
   return (
     <>
       {props.draggable ? (
@@ -79,49 +78,15 @@ const Moons = (props: MoonsProps) => {
           // autoTransform={true}
           axisLock="y"
         >
-          {moonMesh()}
+          {MoonMesh({
+            moonRef: props.moonRef,
+            moonGroupRef: props.moonGroupRef,
+          })}
         </DragControls>
       ) : (
-        moonMesh()
+        MoonMesh({ moonRef: props.moonRef, moonGroupRef: props.moonGroupRef })
       )}
     </>
-
-    // // individual moons
-
-    // <>
-    //   <mesh position={[-4, 0, 0]} receiveShadow>
-    //     <sphereGeometry args={[1, 16]} />
-    //     <meshStandardMaterial />
-    //   </mesh>
-    //   <mesh position={[-3, 0, -3]} receiveShadow>
-    //     <sphereGeometry args={[1, 16]} />
-    //     <meshStandardMaterial />
-    //   </mesh>
-    //   <mesh position={[4, 0, 0]}>
-    //     <sphereGeometry args={[1, 16]} />
-    //     <meshStandardMaterial />
-    //   </mesh>
-    //   <mesh position={[3, 0, 3]}>
-    //     <sphereGeometry args={[1, 16]} />
-    //     <meshStandardMaterial />
-    //   </mesh>
-    //   <mesh position={[0, 0, -4]}>
-    //     <sphereGeometry args={[1, 16]} />
-    //     <meshStandardMaterial />
-    //   </mesh>
-    //   <mesh position={[-3, 0, 3]}>
-    //     <sphereGeometry args={[1, 16]} />
-    //     <meshStandardMaterial />
-    //   </mesh>
-    //   <mesh position={[0, 0, 4]}>
-    //     <sphereGeometry args={[1, 16]} />
-    //     <meshStandardMaterial />
-    //   </mesh>
-    //   <mesh position={[3, 0, -3]}>
-    //     <sphereGeometry args={[1, 16]} />
-    //     <meshStandardMaterial />
-    //   </mesh>
-    // </>
   );
 };
 

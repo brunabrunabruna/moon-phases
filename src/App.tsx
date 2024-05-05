@@ -1,4 +1,4 @@
-import { MutableRefObject, useEffect, useRef } from "react";
+import { MutableRefObject, useEffect, useRef, useState } from "react";
 import "./App.css";
 import { Canvas, useStore, useThree } from "@react-three/fiber";
 import {
@@ -76,43 +76,21 @@ const ParticlesFunc = () => {
   return <>{particleArray}</>;
 };
 
-// Inside Camera component
-interface CameraProps {
-  lookAt: React.RefObject<THREE.Mesh>;
-}
-const Camera = (props: CameraProps) => {
-  const camera = useRef<THREE.PerspectiveCamera>(null);
-  useEffect(() => {
-    if (props.lookAt.current && camera.current) {
-      camera.current.lookAt(props.lookAt.current.position);
-    }
-  }, [props.lookAt, camera]);
-  return null;
+type SceneProps = {
+  moonGroupRef: React.RefObject<THREE.Group>;
+  moonRef: React.RefObject<THREE.Mesh>;
+  draggable: boolean;
 };
-
 //scene component
-const Scene = (props: { draggable: boolean }) => {
-  const moonGroupRef = useRef<THREE.Group>(null);
-  const moonRef = useRef<THREE.Mesh>(null);
-
+const Scene = (props: SceneProps) => {
   return (
     <>
       <color args={["black"]} attach={"background"} />
-      <Camera lookAt={moonRef} />
-      {/* {console.log(moonRef.current?.position)} */}
       <ambientLight intensity={0.05} />
       <directionalLight castShadow intensity={1} position={[-3, 0, 0]} />
 
       <ParticlesFunc />
 
-      {/* moons */}
-      <Moons
-        moonGroupRef={moonGroupRef}
-        moonRef={moonRef}
-        draggable={props.draggable}
-      />
-
-      {/* sun */}
       <Sun />
     </>
   );
@@ -121,6 +99,10 @@ const Scene = (props: { draggable: boolean }) => {
 function App() {
   const wrapperRef = useRef<HTMLDivElement>(null);
 
+  const moonGroupRef = useRef<THREE.Group>(null);
+  const moonRef = useRef<THREE.Mesh>(null);
+
+  const [moonRotation, setMoonRotation] = useState(0);
   return (
     <>
       <PopupInfo title="crescent" />
@@ -148,7 +130,17 @@ function App() {
           <PerspectiveCamera makeDefault position={[4, 6, 4]} fov={55} />
           {/* color property sets the scene background color */}
           <OrbitControls />
-          <Scene draggable={true} />
+          {/* moons */}
+          <Moons
+            moonGroupRef={moonGroupRef}
+            moonRef={moonRef}
+            draggable={true}
+          />
+          <Scene
+            draggable={true}
+            moonGroupRef={moonGroupRef}
+            moonRef={moonRef}
+          />
 
           {/* earth */}
           <mesh position={[0, 0, 0]}>
@@ -164,10 +156,14 @@ function App() {
             position={[2, 0, 0]}
             rotation={new THREE.Euler(0, Math.PI / 2, 0)}
             fov={25}
-            // lookAt={moonGroupRef}
+            lookAt={moonGroupRef}
           />
 
-          <Scene draggable={false} />
+          <Scene
+            draggable={false}
+            moonGroupRef={moonGroupRef}
+            moonRef={moonRef}
+          />
         </View>
 
         {/* canvas combines and renders all the View components */}
