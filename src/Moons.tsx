@@ -35,29 +35,36 @@ type DragControlsProps = {
 };
 
 type MoonsProps = {
-  moonGroupRef: React.Ref<THREE.Mesh>;
+  moonGroupRef: React.RefObject<THREE.Group>;
+  moonRef: React.RefObject<THREE.Mesh>;
   draggable: boolean;
 };
 const Moons = (props: MoonsProps) => {
   // const matrix = new THREE.Matrix4();
 
   const MoonTexture1 = useTexture(MoonTexture);
-  console.log(MoonTexture);
 
   //moon rotation animation
-  useFrame((state, delta) => {
+  useFrame(() => {
     if (props.moonGroupRef.current) {
-      props.moonGroupRef.current.rotation.y += 0.01;
+      props.moonGroupRef.current.rotation.y += 0.001;
     }
   });
+
+  // useFrame(() => {
+  //   if (props.moonRef.current) {
+  //     // console.log(props.moonRef.current?.position);
+  //   }
+  // });
 
   const moonMesh = () => {
     return (
       <group
         position={[0, 0, 0]}
+        ref={props.moonGroupRef}
         // rotation={new Euler(0, Math.PI / 1, 0)}
       >
-        <mesh position={[-4, 0, 0]} receiveShadow ref={props.moonGroupRef}>
+        <mesh position={[-4, 0, 0]} receiveShadow ref={props.moonRef}>
           <sphereGeometry args={[1, 32]} />
           <meshStandardMaterial map={MoonTexture1} />
         </mesh>

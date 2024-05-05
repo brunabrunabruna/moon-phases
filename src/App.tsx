@@ -12,7 +12,9 @@ import Sun from "./Sun";
 import * as THREE from "three";
 import NewCamera from "./NewCamera";
 import PopupInfo from "./PopupInfo";
+import moonData from "./moonData.json";
 
+// console.log(moonData.);
 export type ViewProps = {
   /** Root element type, default: div */
   as?: string;
@@ -90,20 +92,25 @@ const Camera = (props: CameraProps) => {
 
 //scene component
 const Scene = (props: { draggable: boolean }) => {
-  const moonGroupRef = useRef<THREE.Mesh>(null);
+  const moonGroupRef = useRef<THREE.Group>(null);
+  const moonRef = useRef<THREE.Mesh>(null);
 
   return (
     <>
       <color args={["black"]} attach={"background"} />
-      <Camera lookAt={moonGroupRef} />
-      {console.log(moonGroupRef.current?.position)}
+      <Camera lookAt={moonRef} />
+      {/* {console.log(moonRef.current?.position)} */}
       <ambientLight intensity={0.05} />
       <directionalLight castShadow intensity={1} position={[-3, 0, 0]} />
 
       <ParticlesFunc />
 
       {/* moons */}
-      <Moons moonGroupRef={moonGroupRef} draggable={props.draggable} />
+      <Moons
+        moonGroupRef={moonGroupRef}
+        moonRef={moonRef}
+        draggable={props.draggable}
+      />
 
       {/* sun */}
       <Sun />
@@ -157,7 +164,7 @@ function App() {
             position={[2, 0, 0]}
             rotation={new THREE.Euler(0, Math.PI / 2, 0)}
             fov={25}
-            // lookAt={}
+            // lookAt={moonGroupRef}
           />
 
           <Scene draggable={false} />
