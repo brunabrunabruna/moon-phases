@@ -53,7 +53,7 @@ const MoonMesh = (props: MoonMeshProps) => {
       position={[0, 0, 0]}
       ref={props.moonGroupRef}
       // rotation={new Euler(0, Math.PI / 1, 0)}
-      rotateY={moonRotation}
+      // rotateY={moonRotation}
     >
       <mesh position={[-4, 0, 0]} receiveShadow ref={props.moonRef}>
         <sphereGeometry args={[1, 32]} />
