@@ -1,18 +1,19 @@
-import { MutableRefObject, useEffect, useRef, useState } from "react";
+import { MutableRefObject, useRef, useState } from "react";
 import "./App.css";
-import { Canvas, useStore, useThree } from "@react-three/fiber";
+import { Canvas } from "@react-three/fiber";
 import {
   OrbitControls,
-  OrthographicCamera,
+  // OrthographicCamera,
   PerspectiveCamera,
   View,
 } from "@react-three/drei";
 import Moons from "./Moons";
 import Sun from "./Sun";
 import * as THREE from "three";
-import NewCamera from "./NewCamera";
+// import NewCamera from "./NewCamera";
 import PopupInfo from "./PopupInfo";
 import moonData from "./moonData.json";
+import random from "random";
 
 // console.log(moonData.);
 export type ViewProps = {
@@ -47,9 +48,10 @@ export type ViewportProps = {
 //particles
 const ParticlesFunc = () => {
   const particleArray = [];
+  const materialRef = useRef(null);
 
   const randomPosition = (distance: number) => {
-    return (Math.random() - 0.5) * distance;
+    return -0.5 * distance;
   };
   const randomRotation = () => {
     return Math.random() * 2 * Math.PI;
@@ -69,20 +71,19 @@ const ParticlesFunc = () => {
       >
         <sphereGeometry args={[randomSize(), 6]} />
         {/* <circleGeometry args={[0.05]} /> */}
-        <meshBasicMaterial color={"white"} side={THREE.DoubleSide} />
+        <meshBasicMaterial
+          color={"white"}
+          side={THREE.DoubleSide}
+          ref={materialRef}
+        />
       </mesh>
     );
   }
   return <>{particleArray}</>;
 };
 
-type SceneProps = {
-  moonGroupRef: React.RefObject<THREE.Group>;
-  moonRef: React.RefObject<THREE.Mesh>;
-  draggable: boolean;
-};
 //scene component
-const Scene = (props: SceneProps) => {
+const Scene = () => {
   return (
     <>
       <color args={["black"]} attach={"background"} />
@@ -99,13 +100,15 @@ const Scene = (props: SceneProps) => {
 function App() {
   const wrapperRef = useRef<HTMLDivElement>(null);
 
-  const moonGroupRef = useRef<THREE.Group>(null);
-  const moonRef = useRef<THREE.Mesh>(null);
-
   const [moonRotation, setMoonRotation] = useState(0);
   return (
     <>
-      <PopupInfo title="crescent" />
+      <PopupInfo
+        title="crescent"
+        setMoonRotation={setMoonRotation}
+        moonRotation={moonRotation}
+      />
+
       <div
         ref={wrapperRef}
         style={{
@@ -131,16 +134,8 @@ function App() {
           {/* color property sets the scene background color */}
           <OrbitControls />
           {/* moons */}
-          <Moons
-            moonGroupRef={moonGroupRef}
-            moonRef={moonRef}
-            draggable={true}
-          />
-          <Scene
-            draggable={true}
-            moonGroupRef={moonGroupRef}
-            moonRef={moonRef}
-          />
+          <Moons moonRotation={moonRotation} />
+          <Scene />
 
           {/* earth */}
           <mesh position={[0, 0, 0]}>
@@ -156,14 +151,10 @@ function App() {
             position={[2, 0, 0]}
             rotation={new THREE.Euler(0, Math.PI / 2, 0)}
             fov={25}
-            lookAt={moonGroupRef}
           />
+          <Moons moonRotation={moonRotation} />
 
-          <Scene
-            draggable={false}
-            moonGroupRef={moonGroupRef}
-            moonRef={moonRef}
-          />
+          <Scene />
         </View>
 
         {/* canvas combines and renders all the View components */}

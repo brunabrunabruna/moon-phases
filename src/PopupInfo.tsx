@@ -1,7 +1,11 @@
 import React from "react";
 import "./PopupInfo.css";
 
-const PopupInfo = (props: { title: string }) => {
+const PopupInfo = (props: {
+  title: string;
+  setMoonRotation: React.Dispatch<React.SetStateAction<number>>;
+  moonRotation: number;
+}) => {
   return (
     <div className="popup">
       <div className="title">{props.title}</div>
@@ -17,6 +21,14 @@ const PopupInfo = (props: { title: string }) => {
         laboriosam dolorum accusantium doloremque rerum. Nemo assumenda aperiam
         distinctio nam soluta necessitatibus suscipit?
       </div>
+      <button
+        // onMouseEnter={}
+        onClick={() => {
+          props.setMoonRotation(props.moonRotation + 0.5);
+        }}
+      >
+        next state
+      </button>
     </div>
   );
 };

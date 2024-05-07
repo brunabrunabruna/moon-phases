@@ -4,7 +4,7 @@
   background-color: antiquewhite;
   z-index: 300;
   position: fixed;
-  pointer-events: none;
+  /* pointer-events: none; */
   top: 500px;
   right: 0;
   width: 400px;
@@ -12,6 +12,9 @@
   margin: 20px;
   border: 2px solid blue;
   border-radius: 10px;
+}
+.popup:hover {
+  color: aqua;
 }
 
 .title {
