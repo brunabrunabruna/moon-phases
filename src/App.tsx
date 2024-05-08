@@ -1,6 +1,6 @@
-import { MutableRefObject, useRef, useState } from "react";
+import { MutableRefObject, useEffect, useRef, useState } from "react";
 import "./App.css";
-import { Canvas } from "@react-three/fiber";
+import { Canvas, useFrame } from "@react-three/fiber";
 import {
   OrbitControls,
   // OrthographicCamera,
@@ -10,9 +10,7 @@ import {
 import Moons from "./Moons";
 import Sun from "./Sun";
 import * as THREE from "three";
-// import NewCamera from "./NewCamera";
 import PopupInfo from "./PopupInfo";
-import moonData from "./moonData.json";
 import random from "random";
 
 // console.log(moonData.);
@@ -44,6 +42,19 @@ export type ViewportProps = {
 } & React.ForwardRefExoticComponent<
   ViewProps & React.RefAttributes<HTMLElement | THREE.Group>
 >;
+
+//orbit
+const MoonOrbit = () => {
+  return (
+    <mesh
+      // rotation={new THREE.Euler(0, 0, Math.PI / 2)}
+      rotation={new THREE.Euler(Math.PI / 2, 0, 0)}
+    >
+      <torusGeometry args={[4, 0.01]} />
+      <meshBasicMaterial />
+    </mesh>
+  );
+};
 
 //particles
 const ParticlesFunc = () => {
@@ -91,24 +102,19 @@ const Scene = () => {
       <directionalLight castShadow intensity={1} position={[-3, 0, 0]} />
 
       <ParticlesFunc />
-
-      <Sun />
     </>
   );
 };
 
-function App() {
+const App = () => {
   const wrapperRef = useRef<HTMLDivElement>(null);
 
   const [moonRotation, setMoonRotation] = useState(0);
+  //activates or deactivates the camera which rotates together with the moon group (from the center of the scene)
+  const [isCameraRotation, setIsCameraRotation] = useState(false);
+
   return (
     <>
-      <PopupInfo
-        title="crescent"
-        setMoonRotation={setMoonRotation}
-        moonRotation={moonRotation}
-      />
-
       <div
         ref={wrapperRef}
         style={{
@@ -134,7 +140,9 @@ function App() {
           {/* color property sets the scene background color */}
           <OrbitControls />
           {/* moons */}
-          <Moons moonRotation={moonRotation} />
+          <Moons moonRotation={moonRotation} isCameraRotation={false} />
+          <Sun />
+          <MoonOrbit />
           <Scene />
 
           {/* earth */}
@@ -146,16 +154,16 @@ function App() {
 
         {/* moon focus view */}
         <View className="moon-focus-view">
-          <PerspectiveCamera
-            makeDefault
-            position={[2, 0, 0]}
-            rotation={new THREE.Euler(0, Math.PI / 2, 0)}
-            fov={25}
-          />
-          <Moons moonRotation={moonRotation} />
+          <Moons moonRotation={moonRotation} isCameraRotation={true} />
 
           <Scene />
         </View>
+
+        <PopupInfo
+          title="crescent"
+          setMoonRotation={setMoonRotation}
+          moonRotation={moonRotation}
+        />
 
         {/* canvas combines and renders all the View components */}
         <Canvas
@@ -167,6 +175,6 @@ function App() {
       </div>
     </>
   );
-}
+};
 
 export default App;
