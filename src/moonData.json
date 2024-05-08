@@ -1,34 +1,36 @@
-[
-  {
-    "phase": "New Moon",
-    "description": "The Moon is located directly between the Earth and the Sun, making it invisible from Earth."
-  },
-  {
-    "phase": "Waxing Crescent",
-    "description": "The Moon appears to be partly but less than one-half illuminated by direct sunlight. The fraction of the Moon's disk that is illuminated is increasing."
-  },
-  {
-    "phase": "First Quarter",
-    "description": "One-half of the Moon appears to be illuminated by direct sunlight. The fraction of the Moon's disk that is illuminated is increasing."
-  },
-  {
-    "phase": "Waxing Gibbous",
-    "description": "The Moon appears to be more than one-half but not fully illuminated by direct sunlight. The fraction of the Moon's disk that is illuminated is increasing."
-  },
-  {
-    "phase": "Full Moon",
-    "description": "The Moon's illuminated side is facing the Earth. The Moon appears to be completely illuminated by direct sunlight."
-  },
-  {
-    "phase": "Waning Gibbous",
-    "description": "The Moon appears to be more than one-half but not fully illuminated by direct sunlight. The fraction of the Moon's disk that is illuminated is decreasing."
-  },
-  {
-    "phase": "Last Quarter",
-    "description": "One-half of the Moon appears to be illuminated by direct sunlight. The fraction of the Moon's disk that is illuminated is decreasing."
-  },
-  {
-    "phase": "Waning Crescent",
-    "description": "The Moon appears to be partly but less than one-half illuminated by direct sunlight. The fraction of the Moon's disk that is illuminated is decreasing."
-  }
-]
+{
+  "moonData": [
+    {
+      "phase": "New Moon",
+      "description": "The Moon is located directly between the Earth and the Sun, making it invisible from Earth."
+    },
+    {
+      "phase": "Waxing Crescent",
+      "description": "The Moon appears to be partly but less than one-half illuminated by direct sunlight. The fraction of the Moon's disk that is illuminated is increasing."
+    },
+    {
+      "phase": "First Quarter",
+      "description": "One-half of the Moon appears to be illuminated by direct sunlight. The fraction of the Moon's disk that is illuminated is increasing."
+    },
+    {
+      "phase": "Waxing Gibbous",
+      "description": "The Moon appears to be more than one-half but not fully illuminated by direct sunlight. The fraction of the Moon's disk that is illuminated is increasing."
+    },
+    {
+      "phase": "Full Moon",
+      "description": "The Moon's illuminated side is facing the Earth. The Moon appears to be completely illuminated by direct sunlight."
+    },
+    {
+      "phase": "Waning Gibbous",
+      "description": "The Moon appears to be more than one-half but not fully illuminated by direct sunlight. The fraction of the Moon's disk that is illuminated is decreasing."
+    },
+    {
+      "phase": "Last Quarter",
+      "description": "One-half of the Moon appears to be illuminated by direct sunlight. The fraction of the Moon's disk that is illuminated is decreasing."
+    },
+    {
+      "phase": "Waning Crescent",
+      "description": "The Moon appears to be partly but less than one-half illuminated by direct sunlight. The fraction of the Moon's disk that is illuminated is decreasing."
+    }
+  ]
+}

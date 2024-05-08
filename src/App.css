@@ -1,5 +1,29 @@
+@font-face {
+  font-family: "Open Sans Regular";
+  src: url("../public/assets/OpenSans-Regular.ttf");
+}
+@font-face {
+  font-family: "Almendra";
+  src: url("../public/assets/AlmendraDisplay-Regular.ttf");
+}
+@font-face {
+  font-family: "Playfair Medium Italic";
+  src: url("../public/assets/PlayfairDisplay-MediumItalic.ttf");
+}
+@font-face {
+  font-family: "Playfair Regular";
+  src: url("../public/assets/PlayfairDisplay-Regular.ttf");
+}
+
+:root {
+  --primary-color: rgb(81, 0, 255);
+}
+
 * {
   margin: 0;
+}
+body {
+  font-family: "Open Sans Regular";
 }
 
 #canvas-container {
@@ -20,12 +44,14 @@
 
 .moon-focus-view {
   position: fixed;
-  top: 0;
+  /* top: 0; */
+  bottom: 450px;
   right: 0;
   width: 400px;
   height: 400px;
   z-index: 200;
   margin: 20px;
-  border: 2px solid blue;
+  /* padding: 15px; */
+  border: 2px solid var(--primary-color);
   border-radius: 10px;
 }

@@ -1,23 +1,42 @@
 .popup {
-  font-size: 1rem;
+  font-size: 1.5rem;
   color: black;
   background-color: antiquewhite;
   z-index: 300;
   position: fixed;
   /* pointer-events: none; */
-  top: 500px;
+  /* top: 500px; */
+  bottom: 50px;
   right: 0;
-  width: 400px;
-  height: auto;
+  width: 375px;
+  height: 350px;
   margin: 20px;
-  border: 2px solid blue;
+  border: 2px solid var(--primary-color);
   border-radius: 10px;
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
-.popup:hover {
-  color: aqua;
-}
+/* .popup:hover {
+  color: rgb(7, 83, 83);
+} */
 
 .title {
-  font-size: 2rem;
-  color: blue;
+  /* font-family: "almendra"; */
+  /* font-family: "Playfair regular"; */
+  font-family: "Playfair Medium Italic";
+  font-size: 3rem;
+  color: var(--primary-color);
+  margin-bottom: 20px;
+}
+
+.popup button {
+  cursor: pointer;
+  background: none;
+  border-radius: 5px;
+  border: 2px solid var(--primary-color);
+  padding: 5px;
+  margin: 5px;
+  margin-top: 10px;
 }
