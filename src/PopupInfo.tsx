@@ -1,34 +1,56 @@
-import React from "react";
+import React, { useState } from "react";
 import "./PopupInfo.css";
+import moonData from "./moonData.json";
+import { div } from "three/examples/jsm/nodes/Nodes.js";
+
+console.log(moonData.moonData[0].phase);
 
 const PopupInfo = (props: {
   title: string;
   setMoonRotation: React.Dispatch<React.SetStateAction<number>>;
   moonRotation: number;
+  // setCameraRotation: React.Dispatch<React.SetStateAction<number>>;
+  // cameraRotation: number;
 }) => {
+  const [currentPhase, setCurrentPhase] = useState<number>(0);
+
+  //sets the phase from 0 until 7, then back to 0
+  const handleCurrentPhase = (isPositive: boolean) => {
+    if (isPositive) {
+      setCurrentPhase((currentPhase + 1) % 8);
+    } else {
+      setCurrentPhase(currentPhase > 0 ? currentPhase - 1 : 7);
+    }
+  };
+
   return (
-    <div className="popup">
-      <div className="title">{props.title}</div>
-      <div className="description">
-        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Rem architecto
-        impedit ad numquam, accusantium quidem sequi consectetur harum nam
-        ducimus distinctio non, in perferendis quibusdam? Reiciendis dignissimos
-        numquam odio odit Lorem ipsum dolor sit amet, consectetur adipisicing
-        elit. Nobis quas quia tempore delectus tenetur ullam! Ea similique, iste
-        fuga nisi magni autem numquam at quae eaque, cum quia laboriosam neque?
-        Reprehenderit possimus rem ullam architecto sint. Magnam adipisci
-        dignissimos et. Dolores sapiente ipsa maxime rem atque explicabo
-        laboriosam dolorum accusantium doloremque rerum. Nemo assumenda aperiam
-        distinctio nam soluta necessitatibus suscipit?
+    <div>
+      <div className="popup">
+        <div className="title">{moonData.moonData[currentPhase].phase}</div>
+        <div className="description">
+          {moonData.moonData[currentPhase].description}
+        </div>
+        <div>
+          <button
+            onClick={() => {
+              props.setMoonRotation(props.moonRotation + (2 * Math.PI) / 8);
+              handleCurrentPhase(true);
+              console.log(moonData.moonData[currentPhase].phase);
+            }}
+          >
+            next phase
+          </button>
+          <button
+            onClick={() => {
+              props.setMoonRotation(props.moonRotation - (2 * Math.PI) / 8);
+              handleCurrentPhase(false);
+              console.log(moonData.moonData[currentPhase].phase);
+            }}
+          >
+            previous phase
+          </button>
+        </div>
       </div>
-      <button
-        // onMouseEnter={}
-        onClick={() => {
-          props.setMoonRotation(props.moonRotation + 0.5);
-        }}
-      >
-        next state
-      </button>
     </div>
   );
 };
