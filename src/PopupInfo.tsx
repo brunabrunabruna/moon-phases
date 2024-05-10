@@ -1,7 +1,7 @@
+/* eslint-disable no-irregular-whitespace */
 import React, { useState } from "react";
 import "./PopupInfo.css";
 import moonData from "./moonData.json";
-import { div } from "three/examples/jsm/nodes/Nodes.js";
 import { AiOutlineArrowLeft, AiOutlineArrowRight } from "react-icons/ai";
 
 console.log(moonData.moonData[0].phase);

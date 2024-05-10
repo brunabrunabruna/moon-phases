@@ -1,6 +1,5 @@
-import { MutableRefObject, useEffect, useRef, useState } from "react";
+import { MutableRefObject, useRef, useState } from "react";
 import "./App.css";
-import { Canvas, useFrame } from "@react-three/fiber";
 import {
   OrbitControls,
   // OrthographicCamera,
@@ -11,8 +10,8 @@ import Moons from "./Moons";
 import Sun from "./Sun";
 import * as THREE from "three";
 import PopupInfo from "./PopupInfo";
-import random from "random";
 import seedrandom from "seedrandom";
+import { Canvas } from "@react-three/fiber";
 
 //orbit
 const MoonOrbit = () => {
@@ -81,7 +80,7 @@ const App = () => {
 
   const [moonRotation, setMoonRotation] = useState(0);
   //activates or deactivates the camera which rotates together with the moon group (from the center of the scene)
-  const [isCameraRotation, setIsCameraRotation] = useState(false);
+  // const [isCameraRotation, setIsCameraRotation] = useState(false);
 
   return (
     <>

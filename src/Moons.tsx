@@ -1,7 +1,5 @@
-import { DragControls, PerspectiveCamera, useTexture } from "@react-three/drei";
-import { ThreeElements, useFrame } from "@react-three/fiber";
-import React, { useEffect, useRef } from "react";
-import { Euler } from "three";
+import { PerspectiveCamera, useTexture } from "@react-three/drei";
+import { useEffect, useRef } from "react";
 import * as THREE from "three";
 import MoonTexture from "/img/Moon.png";
 
