@@ -12,7 +12,6 @@ import * as THREE from "three";
 import PopupInfo from "./PopupInfo";
 import seedrandom from "seedrandom";
 import { Canvas } from "@react-three/fiber";
-import { BloomPass } from "three/examples/jsm/Addons.js";
 
 //orbit
 const MoonOrbit = () => {
@@ -73,8 +72,6 @@ const Scene = () => {
       <directionalLight castShadow intensity={1} position={[-3, 0, 0]} />
 
       <ParticlesFunc />
-
-      <BloomPass />
     </>
   );
 };
