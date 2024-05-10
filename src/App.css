@@ -23,6 +23,7 @@
 
 * {
   margin: 0;
+  /* background-color: black; */
 }
 body {
   font-family: "Open Sans Regular";
@@ -47,10 +48,15 @@ body {
 .moon-focus-view {
   position: fixed;
   /* top: 0; */
-  bottom: 450px;
-  right: 0;
+  bottom: 100px;
+  /* left: 100px; */
   width: 400px;
   height: 400px;
+
+  /* aligning to popup view */
+  left: 50%;
+  transform: translate(-400px, 0);
+
   z-index: 200;
   margin: 20px;
   /* padding: 15px; */

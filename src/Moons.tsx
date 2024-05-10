@@ -6,6 +6,7 @@ import MoonTexture from "/img/Moon.png";
 type MoonsProps = {
   moonRotation: number;
   isCameraRotation: boolean;
+  moonPosition: THREE.Vector3;
 };
 const Moons = (props: MoonsProps) => {
   const moonGroupRef = useRef<THREE.Group>(null);
@@ -29,7 +30,7 @@ const Moons = (props: MoonsProps) => {
         />
       )}
 
-      <mesh position={[-4, 0, 0]} receiveShadow>
+      <mesh position={props.moonPosition} receiveShadow>
         <sphereGeometry args={[1, 64]} />
         <meshStandardMaterial
           map={moonTexture1}

@@ -12,6 +12,7 @@ import * as THREE from "three";
 import PopupInfo from "./PopupInfo";
 import seedrandom from "seedrandom";
 import { Canvas } from "@react-three/fiber";
+import { BloomPass } from "three/examples/jsm/Addons.js";
 
 //orbit
 const MoonOrbit = () => {
@@ -19,8 +20,9 @@ const MoonOrbit = () => {
     <mesh
       // rotation={new THREE.Euler(0, 0, Math.PI / 2)}
       rotation={new THREE.Euler(Math.PI / 2, 0, 0)}
+      position={[0, 3, 0]}
     >
-      <torusGeometry args={[4, 0.01]} />
+      <torusGeometry args={[4, 0.01, 16, 64]} />
       <meshBasicMaterial />
     </mesh>
   );
@@ -67,10 +69,12 @@ const Scene = () => {
   return (
     <>
       <color args={["black"]} attach={"background"} />
-      <ambientLight intensity={0.05} />
+      <ambientLight intensity={0.1} />
       <directionalLight castShadow intensity={1} position={[-3, 0, 0]} />
 
       <ParticlesFunc />
+
+      <BloomPass />
     </>
   );
 };
@@ -92,6 +96,7 @@ const App = () => {
           left: 0,
           right: 0,
           bottom: 0,
+          backgroundColor: "black",
         }}
       >
         {/* main view */}
@@ -105,17 +110,21 @@ const App = () => {
             zIndex: "100",
           }}
         >
-          <PerspectiveCamera makeDefault position={[8, 3, 10]} fov={55} />
+          <PerspectiveCamera makeDefault position={[8, 6, 10]} fov={55} />
           {/* color property sets the scene background color */}
-          <OrbitControls />
+          <OrbitControls enableZoom={false} enablePan={false} />
           {/* moons */}
-          <Moons moonRotation={moonRotation} isCameraRotation={false} />
+          <Moons
+            moonRotation={moonRotation}
+            isCameraRotation={false}
+            moonPosition={[-4, 3, 0]}
+          />
           <Sun />
           <MoonOrbit />
           <Scene />
 
           {/* earth */}
-          <mesh position={[0, 0, 0]}>
+          <mesh position={[0, 3, 0]}>
             <sphereGeometry args={[1, 16]} />
             <meshBasicMaterial wireframe side={1} />
           </mesh>
@@ -123,7 +132,11 @@ const App = () => {
 
         {/* moon focus view */}
         <View className="moon-focus-view">
-          <Moons moonRotation={moonRotation} isCameraRotation={true} />
+          <Moons
+            moonRotation={moonRotation}
+            isCameraRotation={true}
+            moonPosition={new THREE.Vector3(-4, 0, 0)}
+          />
 
           <Scene />
         </View>

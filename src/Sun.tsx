@@ -6,7 +6,7 @@ const Sun = () => {
 
   return (
     <>
-      <mesh position={[-14, 0, 0]}>
+      <mesh position={[-14, 3, 0]}>
         <sphereGeometry args={[5]} />
         <meshBasicMaterial
           color={"yellow"}

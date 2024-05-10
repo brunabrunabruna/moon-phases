@@ -5,14 +5,21 @@
   z-index: 300;
   position: fixed;
 
-  bottom: 50px;
-  right: 0;
-  width: 375px;
-  height: 350px;
+  bottom: 100px;
+  width: 370px;
+  height: 370px;
   margin: 20px;
   border: 2px solid var(--primary-color);
+  border-left: none;
   border-radius: 10px;
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
   padding: 15px;
+
+  /* aligning to moon view */
+  right: 50%;
+  transform: translate(400px, 0);
+
   display: flex;
   flex-direction: column;
   justify-content: space-between;
