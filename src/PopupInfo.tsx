@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import "./PopupInfo.css";
 import moonData from "./moonData.json";
 import { div } from "three/examples/jsm/nodes/Nodes.js";
+import { AiOutlineArrowLeft, AiOutlineArrowRight } from "react-icons/ai";
 
 console.log(moonData.moonData[0].phase);
 
@@ -25,21 +26,30 @@ const PopupInfo = (props: {
 
   return (
     <div>
+      {/* <div className="page-title">
+        ˚　　　　✦　　　.　　. 　 ˚　.　　　　　 . ✦　　 .˚ Moon Phases
+        ˚　　　　　　　.　　. 　 ˚　.　 . ✦　　 .˚
+      </div> */}
+      <div className="page-title">
+        ݁₊ ⊹ . ݁ ⟡ ݁ . ⊹ ₊ ݁. Moon Phases . ݁₊ ⊹ . ݁ ⟡ ݁ . ⊹ ₊ ݁
+      </div>
+
       <div className="popup">
         <div className="title">{moonData.moonData[currentPhase].phase}</div>
-        <div className="description">
-          {moonData.moonData[currentPhase].description}
+        {/* <div className="details">─ ⊹ ⊱ ☆ ⊰ ⊹ ─</div> */}
+        <div className="details">
+          ˚　　　　✦　　　.　　. 　 ˚　.　　　　　 . ✦　　 .˚
+        </div>
+        {/* <div className="details">
+          ˚　　　　✦　　　.　　. 　 ˚. ★⋆. 　　˚　　 　　*　　
+          　　✦　　　.　　.　　　✦　˚ 　　　　 ˚　.˚　　　　·˖✶
+        </div> */}
+        <div className="description-wrapper">
+          <div className="description">
+            {moonData.moonData[currentPhase].description}
+          </div>
         </div>
         <div>
-          <button
-            onClick={() => {
-              props.setMoonRotation(props.moonRotation + (2 * Math.PI) / 8);
-              handleCurrentPhase(true);
-              console.log(moonData.moonData[currentPhase].phase);
-            }}
-          >
-            next phase
-          </button>
           <button
             onClick={() => {
               props.setMoonRotation(props.moonRotation - (2 * Math.PI) / 8);
@@ -47,7 +57,16 @@ const PopupInfo = (props: {
               console.log(moonData.moonData[currentPhase].phase);
             }}
           >
-            previous phase
+            <AiOutlineArrowLeft />
+          </button>
+          <button
+            onClick={() => {
+              props.setMoonRotation(props.moonRotation + (2 * Math.PI) / 8);
+              handleCurrentPhase(true);
+              console.log(moonData.moonData[currentPhase].phase);
+            }}
+          >
+            <AiOutlineArrowRight />
           </button>
         </div>
       </div>

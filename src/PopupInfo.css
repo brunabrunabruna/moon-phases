@@ -1,11 +1,10 @@
 .popup {
-  font-size: 1.5rem;
-  color: black;
-  background-color: antiquewhite;
+  font-size: 1rem;
+  background-color: rgb(0, 0, 0);
+  color: var(--secondary-color);
   z-index: 300;
   position: fixed;
-  /* pointer-events: none; */
-  /* top: 500px; */
+
   bottom: 50px;
   right: 0;
   width: 375px;
@@ -18,20 +17,46 @@
   flex-direction: column;
   justify-content: space-between;
 }
-/* .popup:hover {
-  color: rgb(7, 83, 83);
-} */
+
+.page-title {
+  position: fixed;
+  top: 0;
+  margin-top: 5rem;
+  font-size: 2rem;
+  /* font-family: "almendra"; */
+  font-family: "Playfair Medium Italic";
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: var(--secondary-color);
+  z-index: 400;
+  width: 600px; /* Set to desired width */
+  height: 100px;
+  justify-content: center;
+}
 
 .title {
   /* font-family: "almendra"; */
   /* font-family: "Playfair regular"; */
   font-family: "Playfair Medium Italic";
-  font-size: 3rem;
+  font-size: 2rem;
   color: var(--primary-color);
-  margin-bottom: 20px;
+  margin-bottom: 1rem;
+}
+
+.description-wrapper {
+  display: flex;
+  align-items: start;
+  width: 100%;
+  height: 100%;
+}
+
+.details {
+  margin-bottom: 1rem;
 }
 
 .popup button {
+  color: inherit;
+  font-size: 1.5rem;
   cursor: pointer;
   background: none;
   border-radius: 5px;

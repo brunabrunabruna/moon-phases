@@ -12,36 +12,7 @@ import Sun from "./Sun";
 import * as THREE from "three";
 import PopupInfo from "./PopupInfo";
 import random from "random";
-
-// console.log(moonData.);
-export type ViewProps = {
-  /** Root element type, default: div */
-  as?: string;
-  /** CSS id prop */
-  id?: string;
-  /** CSS classname prop */
-  className?: string;
-  /** CSS style prop */
-  style?: React.CSSProperties;
-  /** If the view is visible or not, default: true */
-  visible?: boolean;
-  /** Views take over the render loop, optional render index (1 by default) */
-  index?: number;
-  /** If you know your view is always at the same place set this to 1 to avoid needless getBoundingClientRect overhead */
-  frames?: number;
-  /** The scene to render, if you leave this undefined it will render the default scene */
-  children?: React.ReactNode;
-  /** The tracking element, the view will be cut according to its whereabouts
-   * @deprecated You can use inline Views now, see: https://github.com/pmndrs/drei/pull/1784
-   */
-  track?: React.MutableRefObject<HTMLElement>;
-};
-
-export type ViewportProps = {
-  Port: () => React.ReactNode;
-} & React.ForwardRefExoticComponent<
-  ViewProps & React.RefAttributes<HTMLElement | THREE.Group>
->;
+import seedrandom from "seedrandom";
 
 //orbit
 const MoonOrbit = () => {
@@ -62,16 +33,15 @@ const ParticlesFunc = () => {
   const materialRef = useRef(null);
 
   const randomPosition = (distance: number) => {
-    return -0.5 * distance;
+    return (random1() * 2 - 1) * distance;
   };
-  const randomRotation = () => {
-    return Math.random() * 2 * Math.PI;
-  };
+  const random1 = seedrandom("rotation");
+
   const randomSize = () => {
-    return (Math.random() * 5) / 200;
+    return (random1() * 5) / 170;
   };
 
-  for (let i = 0; i < 500; i++) {
+  for (let i = 0; i < 1000; i++) {
     particleArray.push(
       <mesh
         key={i}
@@ -136,7 +106,7 @@ const App = () => {
             zIndex: "100",
           }}
         >
-          <PerspectiveCamera makeDefault position={[4, 6, 4]} fov={55} />
+          <PerspectiveCamera makeDefault position={[8, 3, 10]} fov={55} />
           {/* color property sets the scene background color */}
           <OrbitControls />
           {/* moons */}

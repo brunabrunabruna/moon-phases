@@ -32,8 +32,12 @@ const Moons = (props: MoonsProps) => {
       )}
 
       <mesh position={[-4, 0, 0]} receiveShadow>
-        <sphereGeometry args={[1, 32]} />
-        <meshStandardMaterial map={moonTexture1} />
+        <sphereGeometry args={[1, 64]} />
+        <meshStandardMaterial
+          map={moonTexture1}
+          // normalMap={moonTexture1}
+          bumpMap={moonTexture1}
+        />
       </mesh>
     </group>
   );
