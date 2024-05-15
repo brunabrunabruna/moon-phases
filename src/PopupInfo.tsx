@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import "./PopupInfo.css";
 import moonData from "./moonData.json";
 import { AiOutlineArrowLeft, AiOutlineArrowRight } from "react-icons/ai";
+import ReactSlider from "react-slider";
 
 console.log(moonData.moonData[0].phase);
 
@@ -14,13 +15,38 @@ const PopupInfo = (props: {
   // cameraRotation: number;
 }) => {
   const [currentPhase, setCurrentPhase] = useState<number>(0);
-
+  const maxValue = 700;
   //sets the phase from 0 until 7, then back to 0
   const handleCurrentPhase = (isPositive: boolean) => {
     if (isPositive) {
       setCurrentPhase((currentPhase + 1) % 8);
     } else {
       setCurrentPhase(currentPhase > 0 ? currentPhase - 1 : 7);
+    }
+  };
+
+  const handleCurrentPhaseSlider = (value: number) => {
+    const phaseInterval = maxValue / 8;
+
+    // const value = props.value;
+
+    if (0 <= value && value < phaseInterval) {
+      // setCurrentPhase(0);
+      return 0;
+    } else if (phaseInterval <= value && value < phaseInterval * 2) {
+      return 1;
+    } else if (phaseInterval * 2 <= value && value < phaseInterval * 3) {
+      return 2;
+    } else if (phaseInterval * 3 <= value && value < phaseInterval * 4) {
+      return 3;
+    } else if (phaseInterval * 4 <= value && value < phaseInterval * 5) {
+      return 4;
+    } else if (phaseInterval * 5 <= value && value < phaseInterval * 6) {
+      return 5;
+    } else if (phaseInterval * 6 <= value && value < phaseInterval * 7) {
+      return 6;
+    } else if (phaseInterval * 7 <= value && value <= phaseInterval * 8) {
+      return 7;
     }
   };
 
@@ -35,6 +61,27 @@ const PopupInfo = (props: {
       </div>
 
       <div className="popup">
+        {/* react slider */}
+        <ReactSlider
+          min={0}
+          max={maxValue}
+          onChange={(value: number) => {
+            setCurrentPhase(handleCurrentPhaseSlider(value));
+            // handleCurrentPhaseSlider(value);
+
+            props.setMoonRotation((value * Math.PI * 2) / 700);
+            // props.setMoonRotation(props.moonRotation - (2 * Math.PI) / 8);
+
+            console.log("currentPhase", currentPhase);
+            console.log(value);
+            // console.log(moonData.moonData[currentPhase].phase);
+          }}
+          className="horizontal-slider"
+          thumbClassName="thumb"
+          trackClassName="track"
+          // renderThumb={(props, state) => <div {...props}>{state.valueNow}</div>}
+        />
+
         <div className="title">{moonData.moonData[currentPhase].phase}</div>
         {/* <div className="details">─ ⊹ ⊱ ☆ ⊰ ⊹ ─</div> */}
         <div className="details">
@@ -50,7 +97,7 @@ const PopupInfo = (props: {
           </div>
         </div>
         <div>
-          <button
+          {/* <button
             onClick={() => {
               props.setMoonRotation(props.moonRotation - (2 * Math.PI) / 8);
               handleCurrentPhase(false);
@@ -67,7 +114,7 @@ const PopupInfo = (props: {
             }}
           >
             <AiOutlineArrowRight />
-          </button>
+          </button> */}
         </div>
       </div>
     </div>

@@ -70,8 +70,6 @@ const Scene = () => {
       <color args={["black"]} attach={"background"} />
       <ambientLight intensity={0.1} />
       <directionalLight castShadow intensity={1} position={[-3, 0, 0]} />
-
-      <ParticlesFunc />
     </>
   );
 };
@@ -114,10 +112,12 @@ const App = () => {
           <Moons
             moonRotation={moonRotation}
             isCameraRotation={false}
-            moonPosition={[-4, 3, 0]}
+            moonPosition={new THREE.Vector3(-4, 3, 0)}
           />
           <Sun />
           <MoonOrbit />
+          <ParticlesFunc />
+
           <Scene />
 
           {/* earth */}
