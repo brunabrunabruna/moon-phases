@@ -88,7 +88,7 @@ body {
   .moon-focus-view {
     width: 200px;
     height: 200px;
-    bottom: 10px;
+    bottom: 40px;
     margin: 0;
     padding: 0;
     left: 50%;
@@ -101,8 +101,25 @@ body {
     transform: translate(0, 0); */
   }
 }
+@media (max-width: 700px) {
+  .moon-focus-view {
+    width: 260px;
+    height: 260px;
+    bottom: 10px;
+    margin: 0;
+    margin-bottom: 30px;
+    padding: 0;
+    left: 50%;
+    transform: translateX(-253px);
+  }
+}
 
 @media (max-width: 500px) {
+  .moon-focus-view {
+    display: none;
+  }
+}
+@media (max-height: 450px) {
   .moon-focus-view {
     display: none;
   }
