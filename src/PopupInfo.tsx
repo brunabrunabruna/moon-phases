@@ -2,7 +2,6 @@
 import React, { useState } from "react";
 import "./PopupInfo.css";
 import moonData from "./moonData.json";
-import { AiOutlineArrowLeft, AiOutlineArrowRight } from "react-icons/ai";
 import ReactSlider from "react-slider";
 
 console.log(moonData.moonData[0].phase);
@@ -16,14 +15,16 @@ const PopupInfo = (props: {
 }) => {
   const [currentPhase, setCurrentPhase] = useState<number>(0);
   const maxValue = 700;
+
+  //archive: buttons function>>
   //sets the phase from 0 until 7, then back to 0
-  const handleCurrentPhase = (isPositive: boolean) => {
-    if (isPositive) {
-      setCurrentPhase((currentPhase + 1) % 8);
-    } else {
-      setCurrentPhase(currentPhase > 0 ? currentPhase - 1 : 7);
-    }
-  };
+  // const handleCurrentPhase = (isPositive: boolean) => {
+  //   if (isPositive) {
+  //     setCurrentPhase((currentPhase + 1) % 8);
+  //   } else {
+  //     setCurrentPhase(currentPhase > 0 ? currentPhase - 1 : 7);
+  //   }
+  // };
 
   const handleCurrentPhaseSlider = (value: number) => {
     const phaseInterval = maxValue / 8;
@@ -48,6 +49,9 @@ const PopupInfo = (props: {
     } else if (phaseInterval * 7 <= value && value <= phaseInterval * 8) {
       return 7;
     }
+
+    // added this so the types would be Be Happy, but not sure if its the best way... @felix
+    else return 0;
   };
 
   return (
