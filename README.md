@@ -9,7 +9,9 @@ https://brunabrunabruna.github.io/moon-phases/
 ![desktop view screenshot](/public/img/screenshot-desktop.png)
 ![mobile view screenshot](/public/img/screenshot-mobile.png)
 
-<img src="/public/img/screenshot-mobile-small.png" style="display: inline-block; margin: 0 auto; max-width: 200px"/ >
+<p align="center">
+  <img src="/public/img/screenshot-mobile-small.png" alt="Example Image" width="200">
+</p>
 
 ### Solar System View
 
