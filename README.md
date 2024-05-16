@@ -1,4 +1,6 @@
-# ⋆˖⁺‧₊☽◯☾₊‧⁺˖⋆ Moon Phases ⋆˖⁺‧₊☽◯☾₊‧⁺˖⋆
+# ⋆˖⁺‧₊☽◯☾₊‧⁺˖⋆
+
+# Moon Phases
 
 Moon Phases is an interactive React three fiber project which shows all the moon phases, their view from earth, as well as a view in the (simplified) solar system. It's fully rsponsive, but best viewed in bigger displays.
 
