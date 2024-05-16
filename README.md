@@ -7,13 +7,14 @@ Moon Phases is an interactive React three fiber project which shows all the moon
 https://brunabrunabruna.github.io/moon-phases/
 
 ![desktop view screenshot](/public/img/screenshot-desktop.png)
+![desktop view screenshot](/public/img/screenshot-mobile-both.png)
 
-<p align="center">
-  <img src="/public/img/screenshot-mobile-small.png" alt="small mobile view screenshot" width="300">
+<!-- <p align="center">
+  <img src="/public/img/screenshot-mobile-small.png" alt="small mobile view screenshot" width="200">
 </p>
 <p align="center">
   <img src="/public/img/screenshot-mobile.png" alt="mobile view screenshot" width="300">
-</p>
+</p> -->
 
 ### Solar System View
 
