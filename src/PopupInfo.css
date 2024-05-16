@@ -79,7 +79,7 @@
   transform: translate(-50%, -50%);
   color: var(--secondary-color);
   z-index: 400;
-  width: 600px; /* Set to desired width */
+  width: 600px;
   height: 100px;
   justify-content: center;
 }
@@ -170,8 +170,8 @@
     border-radius: 10px; */
     padding-top: 10px;
 
-    left: 70%;
-    transform: translateX(-136px);
+    left: 50%;
+    transform: translate(0px);
   }
   .title {
     font-size: 1.5rem;
@@ -195,6 +195,7 @@
   .title {
     font-size: 1.5rem;
     padding: 10px;
+    text-align: center;
   }
 }
 @media (max-height: 450px) {

@@ -22,7 +22,7 @@ const MoonOrbit = () => {
       position={[0, 3, 0]}
     >
       <torusGeometry args={[4, 0.01, 16, 64]} />
-      <meshBasicMaterial />
+      <meshBasicMaterial color={"#ffcd68"} />
     </mesh>
   );
 };

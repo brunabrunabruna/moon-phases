@@ -46,8 +46,10 @@ const PopupInfo = (props: {
       return 5;
     } else if (phaseInterval * 6 <= value && value < phaseInterval * 7) {
       return 6;
-    } else if (phaseInterval * 7 <= value && value <= phaseInterval * 8) {
+    } else if (phaseInterval * 7 <= value && value < phaseInterval * 8) {
       return 7;
+    } else if (phaseInterval * 8 === value) {
+      return 0;
     }
 
     // added this so the types would be Be Happy, but not sure if its the best way... @felix
@@ -71,19 +73,15 @@ const PopupInfo = (props: {
           max={maxValue}
           onChange={(value: number) => {
             setCurrentPhase(handleCurrentPhaseSlider(value));
-            // handleCurrentPhaseSlider(value);
 
             props.setMoonRotation((value * Math.PI * 2) / 700);
-            // props.setMoonRotation(props.moonRotation - (2 * Math.PI) / 8);
 
             console.log("currentPhase", currentPhase);
             console.log(value);
-            // console.log(moonData.moonData[currentPhase].phase);
           }}
           className="horizontal-slider"
           thumbClassName="thumb"
           trackClassName="track"
-          // renderThumb={(props, state) => <div {...props}>{state.valueNow}</div>}
         />
 
         <div className="title">{moonData.moonData[currentPhase].phase}</div>
@@ -91,10 +89,7 @@ const PopupInfo = (props: {
         <div className="details">
           ˚　　　　✦　　　.　　. 　 ˚　.　　　　　 . ✦　　 .˚
         </div>
-        {/* <div className="details">
-          ˚　　　　✦　　　.　　. 　 ˚. ★⋆. 　　˚　　 　　*　　
-          　　✦　　　.　　.　　　✦　˚ 　　　　 ˚　.˚　　　　·˖✶
-        </div> */}
+
         <div className="description-wrapper">
           <div className="description">
             {moonData.moonData[currentPhase].description}

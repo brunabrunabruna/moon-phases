@@ -2,17 +2,10 @@
   font-family: "Open Sans Regular";
   src: url("../public/assets/OpenSans-Regular.ttf");
 }
-@font-face {
-  font-family: "Almendra";
-  src: url("../public/assets/AlmendraDisplay-Regular.ttf");
-}
+
 @font-face {
   font-family: "Playfair Medium Italic";
   src: url("../public/assets/PlayfairDisplay-MediumItalic.ttf");
-}
-@font-face {
-  font-family: "Playfair Regular";
-  src: url("../public/assets/PlayfairDisplay-Regular.ttf");
 }
 
 :root {
@@ -57,7 +50,7 @@ body {
 
   /* aligning to popup view */
   left: 50%;
-  transform: translate(-330px, 0);
+  transform: translate(-367px, 0);
 
   z-index: 200;
 
