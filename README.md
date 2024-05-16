@@ -9,6 +9,8 @@ https://brunabrunabruna.github.io/moon-phases/
 ![desktop view screenshot](/public/img/screenshot-desktop.png)
 ![mobile view screenshot](/public/img/screenshot-mobile.png)
 
+<img src="/public/img/screenshot-mobile-small.png"/ style="display: inline-block; margin: 0 auto; max-width: 200px"> >
+
 ### Solar System View
 
 You can rotate around the solar system view to take a look at the moon from different angles, and see how the sun ilumminates it.
