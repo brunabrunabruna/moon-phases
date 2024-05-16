@@ -1,30 +1,28 @@
-# React + TypeScript + Vite
+# Moon Phases
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Moon Phases is an interactive React three fiber project which shows all the moon phases, their view from earth, as well as a view in the (simplified) solar system. It's fully rsponsive, but best viewed in bigger displays.
 
-Currently, two official plugins are available:
+## Live Link:
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+https://brunabrunabruna.github.io/moon-phases/
 
-## Expanding the ESLint configuration
+![desktop view screenshot](/public/img/screenshot-desktop.png)
+![mobile view screenshot](/public/img/screenshot-mobile.png)
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+### Solar System View
 
-- Configure the top-level `parserOptions` property like this:
+You can rotate around the solar system view to take a look at the moon from different angles, and see how the sun ilumminates it.
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
-```
+### Earth View
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+On the earth view (visible in bigger screens like laptops and tablets) the moon is shown in our earth perspective.
+
+### How it works
+
+Simply move the slider button from one side to another to rotate the moon and show the correspondent phase.
+
+### Technologies
+
+- React / Typescript
+- React-Three-Fiber
+- Libraries: seedrandom, react-slider.
