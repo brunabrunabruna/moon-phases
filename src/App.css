@@ -39,81 +39,48 @@ body {
 }
 
 .moon-focus-view {
-  position: fixed;
-  /* top: 0; */
-  bottom: 20px;
-  /* left: 100px; */
   width: 330px;
   height: 330px;
+  /* position: fixed;
+  bottom: 20px;
+  
   margin: 20px;
-  margin-bottom: 50px;
+  margin-bottom: 50px; */
 
   /* aligning to popup view */
-  left: 50%;
+  /* left: 50%;
   transform: translate(-367px, 0);
 
-  z-index: 200;
+  z-index: 200; */
 
+  /* border: 2px solid var(--primary-color);
+  border-radius: 10px; */
+}
+
+.overlay {
+  min-width: 700px;
+
+  position: fixed;
+  left: 10px;
+  right: 10px;
+  bottom: 10px;
+  z-index: 200;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: center;
+  align-items: center;
   border: 2px solid var(--primary-color);
   border-radius: 10px;
 }
 
-@media (max-width: 1000px) {
-  .moon-focus-view {
-    width: 200px;
-    height: 200px;
-    bottom: 10px;
-    margin: 0;
-    margin-bottom: 30px;
+.popup {
+  max-width: 400px;
+  font-size: 1rem;
+  background-color: rgb(0, 0, 0);
+  color: var(--secondary-color);
+  z-index: 300;
 
-    padding: 0;
-    left: 50%;
-    transform: translateX(-345px);
-    /* aligning to popup view */
-    /* right: 0;
-    left: auto;
-    top: 0;
-    transform: translate(0, 0); */
-  }
-}
-
-@media (max-height: 800px) {
-  .moon-focus-view {
-    width: 200px;
-    height: 200px;
-    bottom: 40px;
-    margin: 0;
-    padding: 0;
-    left: 50%;
-    transform: translateX(-345px);
-
-    /* aligning to popup view */
-    /* right: 0;
-    left: auto;
-    top: 0;
-    transform: translate(0, 0); */
-  }
-}
-@media (max-width: 700px) {
-  .moon-focus-view {
-    width: 260px;
-    height: 260px;
-    bottom: 10px;
-    margin: 0;
-    margin-bottom: 30px;
-    padding: 0;
-    left: 50%;
-    transform: translateX(-253px);
-  }
-}
-
-@media (max-width: 500px) {
-  .moon-focus-view {
-    display: none;
-  }
-}
-@media (max-height: 450px) {
-  .moon-focus-view {
-    display: none;
-  }
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }

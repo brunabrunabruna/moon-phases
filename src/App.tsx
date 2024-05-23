@@ -78,11 +78,12 @@ const App = () => {
   const wrapperRef = useRef<HTMLDivElement>(null);
 
   const [moonRotation, setMoonRotation] = useState(0);
-  //activates or deactivates the camera which rotates together with the moon group (from the center of the scene)
-  // const [isCameraRotation, setIsCameraRotation] = useState(false);
 
   return (
     <>
+      <div className="page-title">
+        ݁₊ ⊹ . ݁ ⟡ ݁ . ⊹ ₊ ݁. Moon Phases . ݁₊ ⊹ . ݁ ⟡ ݁ . ⊹ ₊ ݁
+      </div>
       <div
         ref={wrapperRef}
         style={{
@@ -128,21 +129,22 @@ const App = () => {
         </View>
 
         {/* moon focus view */}
-        <View className="moon-focus-view">
-          <Moons
+        <div className="overlay">
+          <View className="moon-focus-view">
+            <Moons
+              moonRotation={moonRotation}
+              isCameraRotation={true}
+              moonPosition={new THREE.Vector3(-4, 0, 0)}
+            />
+
+            <Scene />
+          </View>
+
+          <PopupInfo
+            setMoonRotation={setMoonRotation}
             moonRotation={moonRotation}
-            isCameraRotation={true}
-            moonPosition={new THREE.Vector3(-4, 0, 0)}
           />
-
-          <Scene />
-        </View>
-
-        <PopupInfo
-          title="crescent"
-          setMoonRotation={setMoonRotation}
-          moonRotation={moonRotation}
-        />
+        </div>
 
         {/* canvas combines and renders all the View components */}
         <Canvas
