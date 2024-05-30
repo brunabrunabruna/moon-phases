@@ -1,7 +1,7 @@
 import { PerspectiveCamera, useTexture } from "@react-three/drei";
 import { useEffect, useRef } from "react";
 import * as THREE from "three";
-import MoonTexture from "/img/Moon.png";
+import MoonTextureImg from "/img/Moon.png";
 
 type MoonsProps = {
   moonRotation: number;
@@ -10,7 +10,7 @@ type MoonsProps = {
 };
 const Moons = (props: MoonsProps) => {
   const moonGroupRef = useRef<THREE.Group>(null);
-  const moonTexture1 = useTexture(MoonTexture);
+  const moonTexture = useTexture(MoonTextureImg);
 
   useEffect(() => {
     if (moonGroupRef.current) {
@@ -32,11 +32,7 @@ const Moons = (props: MoonsProps) => {
 
       <mesh position={props.moonPosition} receiveShadow>
         <sphereGeometry args={[1, 64]} />
-        <meshStandardMaterial
-          map={moonTexture1}
-          // normalMap={moonTexture1}
-          bumpMap={moonTexture1}
-        />
+        <meshStandardMaterial map={moonTexture} />
       </mesh>
     </group>
   );

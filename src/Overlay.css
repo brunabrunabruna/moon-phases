@@ -29,35 +29,10 @@
   display: block;
   box-shadow: 0 0 2px 0 rgb(0 0 0 / 44%);
 }
-/* .active {
-  background: white;
-} */
+
 .thumb:focus {
   outline: none;
 }
 .thumb:active {
   outline: rgba(255, 205, 104, 0.5) solid 10px;
-}
-
-.page-title {
-  position: fixed;
-  top: 0;
-  margin-top: 5rem;
-  font-size: 2rem;
-  /* font-family: "almendra"; */
-  font-family: "Playfair Medium Italic";
-  left: 50%;
-  transform: translate(-50%, -50%);
-  color: var(--secondary-color);
-  z-index: 400;
-  width: 600px;
-  height: 100px;
-  justify-content: center;
-}
-
-.description-wrapper {
-  display: flex;
-  align-items: start;
-  width: 100%;
-  height: 100%;
 }

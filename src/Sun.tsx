@@ -1,19 +1,16 @@
 import { useTexture } from "@react-three/drei";
-import sunTexture from "../public/img/sun.jpg";
+import SunTextureImg from "../public/img/sun.jpg";
+import { Vector3 } from "three";
 
 const Sun = () => {
-  const sunTexture1 = useTexture(sunTexture);
-
+  const sunTexture = useTexture(SunTextureImg);
+  const sunPosition = new Vector3(-14, 3, 0);
+  const sphereRadius = 5;
   return (
     <>
-      <mesh position={[-14, 3, 0]}>
-        <sphereGeometry args={[5]} />
-        <meshBasicMaterial
-          color={"yellow"}
-          map={sunTexture1}
-          // transparent={true}
-          opacity={0.7}
-        />
+      <mesh position={sunPosition}>
+        <sphereGeometry args={[sphereRadius]} />
+        <meshBasicMaterial color={"yellow"} map={sunTexture} opacity={0.7} />
       </mesh>
     </>
   );

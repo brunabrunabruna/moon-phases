@@ -9,7 +9,7 @@ import {
 import Moons from "./Moons";
 import Sun from "./Sun";
 import * as THREE from "three";
-import PopupInfo from "./PopupInfo";
+import Overlay from "./Overlay";
 import seedrandom from "seedrandom";
 import { Canvas } from "@react-three/fiber";
 
@@ -84,28 +84,9 @@ const App = () => {
       <div className="page-title">
         ݁₊ ⊹ . ݁ ⟡ ݁ . ⊹ ₊ ݁. Moon Phases . ݁₊ ⊹ . ݁ ⟡ ݁ . ⊹ ₊ ݁
       </div>
-      <div
-        ref={wrapperRef}
-        style={{
-          position: "fixed",
-          top: 0,
-          left: 0,
-          right: 0,
-          bottom: 0,
-          backgroundColor: "black",
-        }}
-      >
+      <div ref={wrapperRef} className="app-wrapper">
         {/* main view */}
-        <View
-          style={{
-            position: "fixed",
-            top: 0,
-            bottom: 0,
-            left: 0,
-            width: "100vw",
-            zIndex: "100",
-          }}
-        >
+        <View className="main-view">
           <PerspectiveCamera makeDefault position={[8, 6, 10]} fov={55} />
           {/* color property sets the scene background color */}
           <OrbitControls enableZoom={false} enablePan={false} />
@@ -140,7 +121,7 @@ const App = () => {
             <Scene />
           </View>
 
-          <PopupInfo
+          <Overlay
             setMoonRotation={setMoonRotation}
             moonRotation={moonRotation}
           />

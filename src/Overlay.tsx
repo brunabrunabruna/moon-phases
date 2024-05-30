@@ -1,21 +1,21 @@
 /* eslint-disable no-irregular-whitespace */
 import React, { useState } from "react";
-import "./PopupInfo.css";
+import "./Overlay.css";
 import moonData from "./moonData.json";
 import ReactSlider from "react-slider";
 import "./App.css";
 
 const stepCount = 700;
 
-const PopupInfo = (props: {
+const Overlay = (props: {
   setMoonRotation: React.Dispatch<React.SetStateAction<number>>;
   moonRotation: number;
 }) => {
   const [currentPhase, setCurrentPhase] = useState<number>(0);
 
   return (
-    <div className="popup">
-      {/* react slider */}
+    <div className="overlay-text">
+      {/* slider for changing moon phases */}
       <ReactSlider
         min={0}
         max={stepCount}
@@ -28,12 +28,14 @@ const PopupInfo = (props: {
         thumbClassName="thumb"
         trackClassName="track"
       />
-
+      {/* current moon phase title*/}
       <div className="title">{moonData.moonData[currentPhase].phase}</div>
+
+      {/* added ideographic spaces, which are not deleted when code is formated */}
       <div className="details">
         ˚　　　　✦　　　.　　. 　 ˚　.　　　　　 . ✦　　 .˚
       </div>
-
+      {/* current moon phase description */}
       <div className="description-wrapper">
         <div className="description">
           {moonData.moonData[currentPhase].description}
@@ -43,4 +45,4 @@ const PopupInfo = (props: {
   );
 };
 
-export default PopupInfo;
+export default Overlay;
