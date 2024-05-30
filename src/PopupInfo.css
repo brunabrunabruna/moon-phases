@@ -55,36 +55,9 @@
   justify-content: center;
 }
 
-.title {
-  /* font-family: "almendra"; */
-  /* font-family: "Playfair regular"; */
-  font-family: "Playfair Medium Italic";
-  font-size: 2rem;
-  color: var(--primary-color);
-  margin-bottom: 1rem;
-  margin-top: 1rem;
-}
-
 .description-wrapper {
   display: flex;
   align-items: start;
   width: 100%;
   height: 100%;
-}
-
-.details {
-  /* margin-bottom: 1rem; */
-  font-size: 0.5rem;
-}
-
-.popup button {
-  color: inherit;
-  font-size: 1rem;
-  cursor: pointer;
-  background: none;
-  border-radius: 5px;
-  border: 2px solid var(--primary-color);
-  padding: 5px;
-  margin: 5px;
-  margin-top: 10px;
 }

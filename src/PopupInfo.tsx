@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import "./PopupInfo.css";
 import moonData from "./moonData.json";
 import ReactSlider from "react-slider";
+import "./App.css";
 
 const stepCount = 700;
 
