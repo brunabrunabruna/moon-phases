@@ -1,11 +1,6 @@
 import { MutableRefObject, useRef, useState } from "react";
 import "./App.css";
-import {
-  OrbitControls,
-  // OrthographicCamera,
-  PerspectiveCamera,
-  View,
-} from "@react-three/drei";
+import { OrbitControls, PerspectiveCamera, View } from "@react-three/drei";
 import Moons from "./Moons";
 import Sun from "./Sun";
 import * as THREE from "three";
@@ -16,11 +11,7 @@ import { Canvas } from "@react-three/fiber";
 //orbit
 const MoonOrbit = () => {
   return (
-    <mesh
-      // rotation={new THREE.Euler(0, 0, Math.PI / 2)}
-      rotation={new THREE.Euler(Math.PI / 2, 0, 0)}
-      position={[0, 3, 0]}
-    >
+    <mesh rotation={new THREE.Euler(Math.PI / 2, 0, 0)} position={[0, 3, 0]}>
       <torusGeometry args={[4, 0.01, 16, 64]} />
       <meshBasicMaterial color={"#ffcd68"} />
     </mesh>
