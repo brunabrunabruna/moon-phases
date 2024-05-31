@@ -19,7 +19,7 @@ const MoonOrbit = () => {
 };
 
 //particles
-const ParticlesFunc = () => {
+const Particles = () => {
   const particleArray = [];
   const materialRef = useRef(null);
 
@@ -89,7 +89,7 @@ const App = () => {
           />
           <Sun />
           <MoonOrbit />
-          <ParticlesFunc />
+          <Particles />
 
           <Scene />
 
