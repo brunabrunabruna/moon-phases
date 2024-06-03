@@ -117,7 +117,6 @@ const App = () => {
             moonRotation={moonRotation}
           />
         </div>
-
         {/* canvas combines and renders all the View components */}
         <Canvas
           shadows
@@ -125,6 +124,7 @@ const App = () => {
         >
           <View.Port />
         </Canvas>
+        <div className="background"></div>
       </div>
     </>
   );

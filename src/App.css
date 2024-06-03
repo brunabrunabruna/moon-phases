@@ -40,8 +40,10 @@ body {
 .moon-focus-view {
   width: 200px;
   height: 200px;
+  z-index: 500;
 }
 
+/* overlay component cannot have solid color background, since Drei View component does not allow it to be on bottom and top of html components (like divs) simultaneously. If the background color is defined here, the moon view View will be underneath it and not show on the page */
 .overlay {
   width: 700px;
   height: 250px;
@@ -55,10 +57,17 @@ body {
   flex-flow: row nowrap;
   justify-content: center;
   align-items: center;
+
   border: 2px solid var(--primary-color);
   border-radius: 10px;
 }
 
+.background {
+  width: 100%;
+  height: 100%;
+  background-color: black;
+  position: fixed;
+}
 .overlay-text {
   max-width: 400px;
   height: 200px;
